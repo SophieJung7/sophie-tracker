@@ -4,6 +4,7 @@ require('./models/Track');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const keys = require('../config/keys');
 //Routes
 const authRoutes = require('./routes/authRoutes');
 const trackRoutes = require('./routes/trackRoutes');
@@ -14,8 +15,7 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 
-const mongoUri =
-  'mongodb+srv://cherryart7:cr5RGq7dYvc0gG2s@cluster0-ldxhm.mongodb.net/tracker?retryWrites=true&w=majority';
+const mongoUri = keys.mongoURI;
 
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
