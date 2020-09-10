@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import { signOut } from '../actions';
 import Spacer from '../components/Spacer';
+import { FontAwesome } from '@expo/vector-icons';
 
 const AccountScreen = ({ signOut }) => {
   return (
@@ -15,6 +16,10 @@ const AccountScreen = ({ signOut }) => {
       </Spacer>
     </SafeAreaView>
   );
+};
+
+AccountScreen.navigationOptions = {
+  tabBarIcon: <FontAwesome name='gear' size={24} color='black' />,
 };
 
 const styles = StyleSheet.create({});

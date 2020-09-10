@@ -7,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { setNavigator } from './src/navigationRef';
 import reducers from './src/reducers';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 // **** Screens
 import FigureAuthScreen from './src/screens/FigureAuthScreen';
@@ -17,6 +18,16 @@ import TrackCreateScreen from './src/screens/TrackCreateScreen';
 import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
 
+const trackListFlow = createStackNavigator({
+  TrackList: TrackListScreen,
+  TrackDetail: TrackDetailScreen,
+});
+
+trackListFlow.navigationOptions = {
+  title: 'Tracks',
+  tabBarIcon: <FontAwesome5 name='list' size={24} color='black' />,
+};
+
 const switchNavigator = createSwitchNavigator({
   FigureAuth: FigureAuthScreen,
   loginFlow: createStackNavigator({
@@ -24,10 +35,7 @@ const switchNavigator = createSwitchNavigator({
     SignIn: SigninScreen,
   }),
   mainFlow: createBottomTabNavigator({
-    trackListFlow: createStackNavigator({
-      TrackList: TrackListScreen,
-      TrackDetail: TrackDetailScreen,
-    }),
+    trackListFlow: trackListFlow,
     TrackCreate: TrackCreateScreen,
     Account: AccountScreen,
   }),

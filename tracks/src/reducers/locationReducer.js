@@ -4,6 +4,7 @@ import {
   ADD_CURRENT_LOCATION,
   ADD_LOCATIONS,
   CHANGE_NAME,
+  RESET,
 } from '../actions/types';
 
 const initialState = {
@@ -25,6 +26,8 @@ export default (state = initialState, action) => {
       return { ...state, locations: [...state.locations, action.payload] };
     case CHANGE_NAME:
       return { ...state, name: action.payload };
+    case RESET:
+      return { ...state, name: '', locations: [] };
     default:
       return state;
   }

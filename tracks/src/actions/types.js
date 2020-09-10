@@ -10,3 +10,4 @@ export const ADD_CURRENT_LOCATION = 'ADD_CURRENT_LOCATION';
 export const CHANGE_NAME = 'CHANGE_NAME';
 export const CREATE_TRACK = 'CREATE_TRACK';
 export const FETCH_TRACKS = 'FETCH_TRACKS';
+export const RESET = 'RESET';

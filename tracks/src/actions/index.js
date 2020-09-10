@@ -12,6 +12,7 @@ import {
   CHANGE_NAME,
   CREATE_TRACK,
   FETCH_TRACKS,
+  RESET,
 } from './types';
 import trackerApi from '../api/tracker';
 import { navigate } from '../navigationRef';
@@ -36,7 +37,7 @@ export const signUp = ({ email, password }) => async (dispatch) => {
 };
 
 export const tryLocalSignIn = () => async (dispatch) => {
-  const token = AsyncStorage.getItem('token');
+  const token = await AsyncStorage.getItem('token');
   if (token) {
     dispatch({
       type: SIGN_IN,
@@ -80,6 +81,28 @@ export const clearError = () => {
 
 // **************** Tracking Actions **************** //
 
+export const fetchTracks = () => async (dispatch) => {
+  const res = await trackerApi.get('/tracks');
+  dispatch({
+    type: FETCH_TRACKS,
+    payload: res.data,
+  });
+};
+
+export const createTrack = (name, locations) => async (dispatch) => {
+  const token = await AsyncStorage.getItem('token');
+  if (token) {
+    await trackerApi.post('/tracks', {
+      name,
+      locations,
+    });
+    dispatch({
+      type: RESET,
+    });
+    navigate('TrackList');
+  }
+};
+
 export const addLocation = (location, recording) => (dispatch) => {
   dispatch({
     type: ADD_CURRENT_LOCATION,
@@ -110,16 +133,6 @@ export const stopRecording = () => {
   return {
     type: STOP_RECORDING,
   };
-};
-
-export const fetchTracks = () => (dispatch) => {};
-
-export const createTrack = (name, locations) => async (dispatch) => {
-  const res = await trackerApi.post('/tracks', { name, locations });
-  dispatch({
-    type: CREATE_TRACK,
-    payload: res.data,
-  });
 };
 
 // export const changeName = (name) => (dispatch) => {

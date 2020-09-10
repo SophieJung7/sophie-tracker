@@ -5,7 +5,7 @@ import { tryLocalSignIn } from '../actions';
 const FigureAuthScreen = ({ tryLocalSignIn }) => {
   useEffect(() => {
     tryLocalSignIn();
-  }, []);
+  }, [tryLocalSignIn]);
 
   return null;
 };
